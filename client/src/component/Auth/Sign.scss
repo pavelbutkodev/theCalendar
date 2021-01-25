@@ -43,14 +43,14 @@ $font-color: rgb(221,221,221);
             outline: 0;
             font-size: 18px;
             font-weight: 700;
-            background: $bg-color;
+            background: #fff;
             color: #fff;
             border-radius: 5px;
             box-shadow: inset 0 0 0 0 transparent;
             padding: 10px;
             & {
                 color: #fff;
-                border: 1px solid rgb(230, 230, 229);
+                border: 3px solid $bg-color;
             }
             &:focus {
                 background: none;

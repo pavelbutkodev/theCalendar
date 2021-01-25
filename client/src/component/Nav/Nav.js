@@ -3,7 +3,7 @@ import {
 	Route,
 	Switch,
 	Link,
-	Redirect
+	Redirect,
 } from 'react-router-dom';
 
 import SignIn from '../Auth/SignIn';
@@ -13,6 +13,7 @@ import MyCalendar from '../Calendar/Calendar';
 import './Nav.scss';
 
 const Nav = () => {
+
 	return (
 		<Router>
 			<div className="container_fluid">
@@ -21,21 +22,22 @@ const Nav = () => {
 						<Link to="/signin">Sign In</Link>
 						<Link to="/signup">Sign Up</Link>
 					</div>
-
-					<Switch>
-						<Route path="/signin">
-							<SignIn/>
-						</Route>
-						<Route path="/signup">
-							<SignUp/>
-						</Route>
-						<Route path="/calendar">
-							<MyCalendar/>
-						</Route>
-						<Route path="/">
-							<Redirect to="/signin"/>
-						</Route>
-					</Switch>
+					<div className="promo">
+						<Switch>
+							<Route path="/signin">
+								<SignIn/>
+							</Route>
+							<Route path="/signup">
+								<SignUp/>
+							</Route>
+							<Route path="/calendar">
+								<MyCalendar/>
+							</Route>
+							<Route path="/">
+								{localStorage.getItem('token') ? <Redirect to="/calendar"/> : <Redirect to="/signin"/> }
+							</Route>
+						</Switch>
+					</div>
 				</div>
 			</div>
 		</Router>
