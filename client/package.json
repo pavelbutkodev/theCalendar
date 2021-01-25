@@ -6,10 +6,17 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
+    "add": "^2.0.6",
+    "axios": "^0.21.1",
+    "node-sass": "4.14.1",
+    "or": "^0.2.0",
     "react": "^17.0.1",
+    "react-calendar": "^3.3.0",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "react-scripts start",
