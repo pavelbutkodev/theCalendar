@@ -1,20 +1,14 @@
 import React from 'react';
 
+import Input from '../../Form/Input'
+import Button from '../../Form/Button';
+
 import './ModalWindow.scss'
 
-const Modal = () => (
-	<div className="container">
-			<form action="#">
-				<label>
-					daasdasdasd
-					<input type="text"/>
-				</label>
-				<label>
-					dasdadas
-					<input type="text"/>
-				</label>
-			</form>
-	</div>
-);
+const Modal = () =>{
+	return (
+		 <Input />
+	)
+}
 
 export default Modal;

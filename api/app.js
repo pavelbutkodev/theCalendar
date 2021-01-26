@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
+const eventsRoutes = require('./routes/events');
 const userRoutes = require('./routes/user');
 const keys = require('./config/keys');
 
@@ -23,5 +24,6 @@ app.use(bodyParser.json())
 app.use(require('cors')())
 
 app.use('/api/user', userRoutes)
+app.use('/api/events', eventsRoutes)
 
 module.exports = app;
