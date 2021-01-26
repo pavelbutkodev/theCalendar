@@ -19,3 +19,21 @@ export const registration = (data) => {
     data,
   });
 };
+
+export const addEvent = (data) => {
+  const url = `${urls.EVENTS}`;
+  return ajaxWrapper({
+    method: 'POST',
+    url,
+    data,
+  }).then(data => data.data)
+};
+
+export const getAll = (data) => {
+  const url = `${urls.EVENTS}`;
+  return ajaxWrapper({
+    method: 'GET',
+    url,
+    data,
+  }).then(data => data.data)
+};

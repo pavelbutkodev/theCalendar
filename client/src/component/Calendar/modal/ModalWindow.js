@@ -1,19 +1,74 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
-import './ModalWindow.scss'
 import Form from "./Form";
 import Formbutton from "./Formbutton";
+import {addEvent} from "../../../services/ajaxUser";
 
-const Modal = () => {
+import './ModalWindow.scss'
+
+const Modal = (props) => {
+
+	const [form, setForm] = useState({
+		title: '',
+		start: '',
+		end: ''
+	});
+
+	const getEventCall = useCallback(
+		(data) => {
+			addEvent(data)
+				.then((response) => {
+					console.log(response)
+				})
+				.catch((e) => {
+					console.log(data)
+				})
+		}, [])
+
+	const handleEventClick = () => {
+		getEventCall(form)
+		props.setActive()
+	}
+
+	const handleInputChange = (event, trigger) => {
+		setForm((prevState) => (
+			{
+				...prevState,
+				[trigger]: event.target.value
+			}
+		))
+	}
+
+	useEffect(()=>{
+		console.log("modalwinwos>JS")
+	}, [])
+
 	return (
 		<div className="modal_form">
 			<h2>Хотите создать новое событие?</h2>
-			<Form name="Введите описание события"/>
-			<Form placeholder="Пример: 28" name="Введите день начала события"/>
-			<Form placeholder="Пример: 11" name="Введите месяц начала события"/>
-			<Form placeholder="Пример: 2021" name="Введите гол начала события"/>
-			<Form placeholder="Пример: 20, 30(20ч 30мин)" name="Введите время начала события"/>
-			<Formbutton btnName="отправить"/>
+			<Form
+				value={form.text}
+				onChange={(e) => handleInputChange(e, 'title')}
+				name="Введите описание события"
+			/>
+			<Form
+				type="date"
+				value={form.text}
+				onChange={(e) => handleInputChange(e, 'start')}
+				placeholder="Формат: 2021, 02, 15"
+				name="Введите дату начала события"
+			/>
+			<Form
+				type="date"
+				value={form.text}
+				onChange={(e) => handleInputChange(e, 'end')}
+				placeholder="Формат: 2021, 02, 17"
+				name="Введите дату окончания события"
+			/>
+			<Formbutton
+				onClick={() => handleEventClick()}
+				btnName="отправить"
+			/>
 		</div>
 	)
 }

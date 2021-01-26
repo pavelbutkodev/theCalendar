@@ -8,7 +8,7 @@ const Form = (props) => {
 			<div className="input_wrapper">
 				<label>
 					{props.name}
-					<input placeholder={props.placeholder} />
+					<input type={props.type} placeholder={props.placeholder} {...props}/>
 				</label>
 			</div>
 		</div>

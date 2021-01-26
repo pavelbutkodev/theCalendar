@@ -6,9 +6,8 @@ const Formbutton = (props) => {
 	return (
 		<div className="form_wrapper">
 			<div className="btn_wrapper">
-				<button className="btn">{props.btnName}</button>
+				<button className="btn" onClick={() => props.onClick()}>{props.btnName}</button>
 			</div>
-
 		</div>
 	)
 }

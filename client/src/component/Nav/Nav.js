@@ -12,10 +12,9 @@ import MyCalendar from '../Calendar/Calendar';
 
 
 import './Nav.scss';
+import ModalWindow from "../Calendar/modal/ModalWindow";
 
 const Nav = ({auth}) => {
-
-
 	return (
 		<Router>
 			<div className="container_fluid">

@@ -1,49 +1,56 @@
 import React from 'react'
-
+import globalize from 'globalize';
 import {Calendar} from 'react-big-calendar'
-import events from './events'
+
 import ExampleControlSlot from './ExampleControlSlot'
 import localizer from "react-big-calendar/lib/localizers/globalize";
-import globalize from 'globalize';
 import ModalWindow from "./modal/ModalWindow";
+import {getAll} from "../../services/ajaxUser";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const propTypes = {}
-
 const globalizeLocalizer = localizer(globalize)
 
 class Selectable extends React.Component {
 	constructor(...args) {
 		super(...args);
 		this.state = {
-			events,
-			checkedRadioBtn: true,
+			events: localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')).map(event => ({
+				...event,
+				start: new Date(event.start),
+				end: new Date(event.end),
+			})) : [],
+			abc: [],
+			active: true,
 			token: localStorage.getItem('token'),
 		};
-		this.toggleRadioBtn = this.toggleRadioBtn.bind(this);
+		this.handleModal = this.handleModal.bind(this);
 		this.admin = localStorage.getItem('admin');
+		this.query = async () => {
+			const arr = await getAll()
+			return arr
+		}
 	}
 
-	handleSelect = ({start, end}) => {
-		const title = window.prompt('New Event name')
-		if (title)
-			this.setState({
-				events: [
-					...this.state.events,
-					{
-						start,
-						end,
-						title,
-					},
-				],
-			})
-	}
+	// handleSelect = ({start, end}) => {
+	// 	const title = window.prompt('New Event name')
+	// 	if (title)
+	// 		this.setState({
+	// 			events: [
+	// 				...this.state.events,
+	// 				{
+	// 					start,
+	// 					end,
+	// 					title,
+	// 				},
+	// 			],
+	// 		})
+	// }
 
-	toggleRadioBtn(){
-		this.setState({checkedRadioBtn: !this.state.checkedRadioBtn});
+	handleModal(){
+		this.setState({active: !this.state.active});
 	};
-
 
 // eventStyleGetter = (event) => {
 	// 	console.log(event);
@@ -60,6 +67,31 @@ class Selectable extends React.Component {
 	// 		style: style
 	// 	};
 	// };
+	rerender(data) {
+		this.setState({
+			abc: data
+		})
+	}
+
+	handleChange = (value) => {
+		this.setState({
+			active: !this.state.active
+		})
+	}
+
+	componentDidMount() {
+		this.query().then((data) => {
+				this.rerender(data)
+		})
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if(this.state.active !== prevState.active){
+			this.query().then((data) => {
+				this.rerender(data)
+			})
+		}
+	}
 
 	render() {
 		return (
@@ -67,9 +99,9 @@ class Selectable extends React.Component {
 				{
 					this.admin === 'test@mail.ru' ?
 					<div>
-						<button onClick={this.toggleRadioBtn}>вызвать модалку</button>
-						<div className={`modal_wrapper ${this.state.checkedRadioBtn ? '' : 'active'}`}>
-							<ModalWindow active={this.state.checkedRadioBtn}/>
+						<button onClick={this.handleModal}>вызвать модалку</button>
+						<div className={`modal_wrapper ${this.state.active ? '' : 'active'}`}>
+							<ModalWindow setActive={this.handleChange}/>
 						</div>
 					</div>
 					:
@@ -89,9 +121,9 @@ class Selectable extends React.Component {
 					step={60}
 					selectable
 					localizer={globalizeLocalizer}
-					events={this.state.events}
-					// onSelectEvent={event => alert(event.title)}
-					onSelectSlot={this.handleSelect}
+					events={this.state.abc}
+					onSelectEvent={event => console.log(event)}
+					// onSelectSlot={this.handleSelect}
 					// eventPropGetter={(this.eventStyleGetter)}
 				/>
 			</div>
