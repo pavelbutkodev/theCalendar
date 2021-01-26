@@ -10,17 +10,26 @@ import SignIn from '../Auth/SignIn';
 import SignUp from '../Auth/SignUp';
 import MyCalendar from '../Calendar/Calendar';
 
+
 import './Nav.scss';
 
-const Nav = () => {
+const Nav = ({auth}) => {
+
 
 	return (
 		<Router>
 			<div className="container_fluid">
 				<div className="container">
 					<div className="nav">
-						<Link to="/signin">Sign In</Link>
-						<Link to="/signup">Sign Up</Link>
+						{auth ?
+							<Link to='/signin'>Exit</Link> :
+							(
+								<>
+									<Link to="/signin">Sign In</Link>
+									<Link to="/signup">Sign Up</Link>
+								</>
+							)
+						}
 					</div>
 					<div className="promo">
 						<Switch>
@@ -34,7 +43,7 @@ const Nav = () => {
 								<MyCalendar/>
 							</Route>
 							<Route path="/">
-								{localStorage.getItem('token') ? <Redirect to="/calendar"/> : <Redirect to="/signin"/> }
+								{auth ? <Redirect to="/calendar"/> : <Redirect to="/signin"/>}
 							</Route>
 						</Switch>
 					</div>

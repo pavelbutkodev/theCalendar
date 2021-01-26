@@ -21,6 +21,7 @@ const SignIn = () => {
 			login(data)
 				.then((response) => {
 					localStorage.setItem('token', response.token);
+					localStorage.setItem('admin', response.body);
 					history.push('/calendar');
 				})
 				.catch((e) => {

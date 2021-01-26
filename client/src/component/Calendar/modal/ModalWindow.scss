@@ -1,0 +1,17 @@
+.container {
+  position: relative;
+  .modal_wrapper {
+    width: 500px;
+    height: 500px;
+    background: #000;
+    color: #fff;
+    z-index: 1000;
+    position: absolute;
+    left: 30%;
+    top: 220px;
+    display: none;
+  }
+  .active {
+    display: block;
+  }
+}
