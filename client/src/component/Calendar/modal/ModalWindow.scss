@@ -1,17 +1,30 @@
+$bg-color: rgb(33, 33, 32);
+$font-color: rgb(221, 221, 221);
+
 .container {
   position: relative;
+
   .modal_wrapper {
     width: 500px;
     height: 500px;
-    background: #000;
-    color: #fff;
+    background: $bg-color;
+    color: $font-color;
     z-index: 1000;
     position: absolute;
     left: 30%;
-    top: 220px;
+    top: 150px;
     display: none;
   }
+
+  h2 {
+    color: $font-color;
+    text-align: center;
+    margin: 5px 0;
+    font-size: 28px;
+  }
+
   .active {
     display: block;
   }
 }
+

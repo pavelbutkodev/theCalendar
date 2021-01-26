@@ -66,12 +66,17 @@ $font-color: rgb(221, 221, 221);
       padding: 10px;
 
       & {
-        color: #fff;
+        color: $bg-color;
         border: 3px solid $bg-color;
       }
 
       &:focus {
         background: none;
+        border: 1px solid $font-color;
+        color: $font-color;
+      }
+      &:active {
+        background: #fff;
         border: 1px solid $font-color;
         color: $font-color;
       }
