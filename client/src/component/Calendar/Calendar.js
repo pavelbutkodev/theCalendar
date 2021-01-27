@@ -6,10 +6,10 @@ import {Calendar} from 'react-big-calendar'
 import ExampleControlSlot from './ExampleControlSlot'
 import {getAll} from "../../services/ajaxUser";
 import ModalWindow from "./modal/ModalWindow";
+import AdminModal from "./modal/AdminModal";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./Calendar.scss"
-import AdminModal from "./modal/AdminModal";
 
 const propTypes = {}
 const globalizeLocalizer = localizer(globalize)
@@ -22,6 +22,7 @@ class Selectable extends React.Component {
 			active: true,
 			token: localStorage.getItem('token'),
 			panel: true,
+			delete: null
 		};
 		this.handleModal = this.handleModal.bind(this);
 		this.admin = localStorage.getItem('admin');
@@ -30,10 +31,15 @@ class Selectable extends React.Component {
 		}
 	}
 
-	handleSelect = () => {
+	handleSelect = (e) => {
 		this.setState({
 			panel: !this.state.panel
 		})
+	}
+
+	clickAdd = (e) => {
+		this.setState({delete: e.id})
+		this.handleSelect()
 	}
 
 	eventStyleGetter = () => {
@@ -54,7 +60,7 @@ class Selectable extends React.Component {
 		})
 	}
 
-	handleModal(){
+	handleModal() {
 		this.setState({active: !this.state.active});
 	};
 
@@ -71,7 +77,11 @@ class Selectable extends React.Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if(this.state.active !== prevState.active){
+		if (this.state.active !== prevState.active) {
+			this.getEvents().then((event) => {
+				this.rerender(event)
+			})
+		} else if (this.state.panel !== prevState.panel) {
 			this.getEvents().then((event) => {
 				this.rerender(event)
 			})
@@ -83,18 +93,23 @@ class Selectable extends React.Component {
 			<div>
 				{
 					this.admin === 'test@mail.ru' ?
-					<div className="admin_panel">
-						<h2>Панель администратора:</h2>
-						<button className="modal_btn" onClick={this.handleModal}>Создать событие</button>
-						<div className={`modal_wrapper ${this.state.active ? '' : 'active'}`}>
-							<ModalWindow setActive={this.handleChange}/>
+						<div className="admin_panel">
+							<h2 className="head_want">Панель администратора:</h2>
+							<button
+								className="modal_btn"
+								onClick={this.handleModal}
+							>
+								Создать событие
+							</button>
+							<div className={`modal_wrapper ${this.state.active ? '' : 'active'}`}>
+								<ModalWindow setActive={this.handleChange}/>
+							</div>
+							<div className={`modal_wrapper ${this.state.panel ? '' : 'active'}`}>
+								<AdminModal setActive={this.handleSelect} id={this.state.delete}/>
+							</div>
 						</div>
-						<div className={`modal_wrapper ${this.state.panel ? '' : 'active'}`}>
-							<AdminModal setActive={this.handleSelect}/>
-						</div>
-					</div>
-					:
-					null
+						:
+						null
 				}
 				<ExampleControlSlot.Entry waitForOutlet>
 					<strong>
@@ -115,7 +130,7 @@ class Selectable extends React.Component {
 						start: new Date(event.start),
 						end: new Date(event.end),
 					}))}
-					onSelectEvent={this.handleSelect}
+					onSelectEvent={e => this.clickAdd(e)}
 					eventPropGetter={(this.eventStyleGetter)}
 				/>
 			</div>

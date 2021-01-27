@@ -11,15 +11,15 @@ const productSchema = new Schema({
 	},
 	title: {
 		type: String,
-		required: true,
+		default: ''
 	},
 	start: {
 		type: String,
-		required: true,
+		default: ''
 	},
 	end: {
 		type: String,
-		required: true,
+		default: ''
 	}
 })
 

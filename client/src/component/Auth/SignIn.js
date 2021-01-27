@@ -1,5 +1,4 @@
 import React, {useCallback, useState} from 'react';
-import {useHistory} from "react-router-dom";
 
 import Input from './Form/Input';
 import Button from './Form/Button';
@@ -7,14 +6,12 @@ import {login} from '../../services/ajaxUser';
 
 import './Sign.scss';
 
-const SignIn = (props) => {
+const SignIn = () => {
 	const [form, setForm] = useState({
 		email: '',
 		password: ''
 	})
 	const [error, setError] = useState();
-
-	const history = useHistory();
 
 	const getApiCall = useCallback(
 		(data) => {
@@ -22,7 +19,7 @@ const SignIn = (props) => {
 				.then((response) => {
 					localStorage.setItem('token', response.token);
 					localStorage.setItem('admin', response.body);
-					history.push('/calendar');
+					window.location.href = '/calendar'
 				})
 				.catch((e) => {
 					setError('Возникла ошибка, возможно вы неверно ввели пароль или email')
