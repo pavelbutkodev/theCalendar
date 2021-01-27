@@ -22,7 +22,7 @@ const SignIn = () => {
 					window.location.href = '/calendar'
 				})
 				.catch((e) => {
-					setError('Возникла ошибка, возможно вы неверно ввели пароль или email')
+					setError('An error occurred, perhaps you entered an incorrect password or email')
 				})
 		}, [])
 

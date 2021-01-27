@@ -26,7 +26,6 @@ module.exports.create = async (req, res) => {
 }
 
 module.exports.remove = async (req, res) => {
-	console.log(req.params.id)
 	try {
 		await Events.deleteOne({
 			id: req.params.id,
@@ -38,7 +37,6 @@ module.exports.remove = async (req, res) => {
 }
 
 module.exports.createElem = async (req, res) => {
-	console.log(req.body)
 	try {
 		const updated = {
 			title: req.body.title,

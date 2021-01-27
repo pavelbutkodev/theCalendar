@@ -22,7 +22,7 @@ module.exports.login = async (req, res) => {
 				})
 			} else {
 				res.status(401).json({
-					message: 'Пароли не совпали'
+					message: 'Passwords did not match'
 				})
 			}
 		} catch (e) {
@@ -32,7 +32,7 @@ module.exports.login = async (req, res) => {
 		}
 	} else {
 		res.status(404).json({
-			message: 'Пользователь с таким email не найден'
+			message: 'User with this email was not found'
 		})
 	}
 }
@@ -42,7 +42,7 @@ module.exports.register = async (req, res) => {
 
 	if (candidate) {
 		res.status(409).json({
-			message: 'Такой email уже занят',
+			message: 'This email is already taken',
 		})
 	} else {
 		const salt = bcrypt.genSaltSync(10);

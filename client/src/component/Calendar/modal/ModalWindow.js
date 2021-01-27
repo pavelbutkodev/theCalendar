@@ -48,29 +48,29 @@ const Modal = (props) => {
 				className="close">
 				<img src={close} alt="close"/>
 			</button>
-			<h2>Хотите создать новое событие?</h2>
+			<h2>Want to create a new event?</h2>
 			<Form
 				value={form.text}
 				onChange={(e) => handleInputChange(e, 'title')}
-				name="Введите описание события"
+				name="Enter event description"
 			/>
 			<Form
 				type="date"
 				value={form.text}
 				onChange={(e) => handleInputChange(e, 'start')}
 				placeholder="Формат: 2021, 02, 15"
-				name="Введите дату начала события"
+				name="Enter the start date of the event"
 			/>
 			<Form
 				type="date"
 				value={form.text}
 				onChange={(e) => handleInputChange(e, 'end')}
 				placeholder="Формат: 2021, 02, 17"
-				name="Введите дату окончания события"
+				name="Enter the end date of the event"
 			/>
 			<Formbutton
 				onClick={() => handleEventClick()}
-				btnName="отправить"
+				btnName="send"
 			/>
 		</div>
 	)

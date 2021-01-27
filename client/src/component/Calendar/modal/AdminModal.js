@@ -28,6 +28,7 @@ const AdminModal = (props) => {
 
 	const clickSendForm = () => {
 		getEventChange(form)
+		props.setActive()
 	}
 
 	const handleInputChange = (event) => {
@@ -56,14 +57,14 @@ const AdminModal = (props) => {
 				className="close">
 				<img src={close} alt="close"/>
 			</button>
-			<h2>Хотите удалить или изменить событие?</h2>
+			<h2>Want to delete or change an event?</h2>
 			<Formbutton
 				onClick={() => handleDelete()}
-				btnName="Удалить"
+				btnName="Delete"
 			/>
 			<Formbutton
 				onClick={() => handleChange()}
-				btnName="Редактировать"
+				btnName="Edit"
 			/>
 			{
 				activeChange ?
@@ -77,7 +78,7 @@ const AdminModal = (props) => {
 							className="btn_change"
 							onClick={clickSendForm}
 						>
-							Изменить
+							Edit
 						</button>
 					</div>
 					:

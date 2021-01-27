@@ -15,14 +15,14 @@ const Exit = () => {
 
 	return (
 		<div className="sign_wrapper">
-			<h2>Вы действительно хотите выйти?</h2>
+			<h2>Do you really want to leave?</h2>
 			<div className="wrapper_form">
 				<Button
-					name="Да"
+					name="Yes"
 					onClick={() => handleClickYes()}
 				/>
 				<Button
-					name="Нет"
+					name="No"
 					onClick={() => handleClickNo()}
 				/>
 			</div>

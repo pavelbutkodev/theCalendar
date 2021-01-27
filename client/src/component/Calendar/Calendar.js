@@ -1,4 +1,4 @@
-import React, {Children} from 'react'
+import React from 'react'
 import globalize from 'globalize';
 import localizer from "react-big-calendar/lib/localizers/globalize";
 import {Calendar} from 'react-big-calendar'
@@ -31,7 +31,7 @@ class Selectable extends React.Component {
 		}
 	}
 
-	handleSelect = (e) => {
+	handleSelect = () => {
 		this.setState({
 			panel: !this.state.panel
 		})
@@ -64,7 +64,7 @@ class Selectable extends React.Component {
 		this.setState({active: !this.state.active});
 	};
 
-	handleChange = (value) => {
+	handleChange = () => {
 		this.setState({
 			active: !this.state.active
 		})
@@ -94,12 +94,12 @@ class Selectable extends React.Component {
 				{
 					this.admin === 'test@mail.ru' ?
 						<div className="admin_panel">
-							<h2 className="head_want">Панель администратора:</h2>
+							<h2 className="head_want">Admin panel:</h2>
 							<button
 								className="modal_btn"
 								onClick={this.handleModal}
 							>
-								Создать событие
+								Create event
 							</button>
 							<div className={`modal_wrapper ${this.state.active ? '' : 'active'}`}>
 								<ModalWindow setActive={this.handleChange}/>

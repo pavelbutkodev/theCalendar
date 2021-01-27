@@ -39,7 +39,6 @@ export const getAll = (data) => {
 
 export const deleteOne = (id) => {
 	const url = `${urls.EVENTS}/${id}`;
-	console.log(id)
 	return ajaxWrapper({
 		method: 'DELETE',
 		url,
@@ -48,7 +47,6 @@ export const deleteOne = (id) => {
 };
 
 export const changeOne = (id, title) => {
-	console.log(id, title)
 	const url = `${urls.EVENTS}/${id}`;
 	return ajaxWrapper({
 		method: 'POST',

@@ -19,10 +19,10 @@ const SignUp = () => {
 			registration(data)
 				.then((response) => {
 					localStorage.setItem('token', response.token);
-					setError('Вы успешно зарегестрировались, теперь совершите вход в систему')
+					setError('You have successfully registered, now log in')
 				})
 				.catch((e) => {
-					setError('Возникла ошибка, возможно вы неверно ввели пароль или email')
+					setError('An error occurred, perhaps you entered an incorrect password or email')
 				})
 		}, [])
 
