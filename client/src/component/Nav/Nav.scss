@@ -1,0 +1,42 @@
+$bg-color: rgb(33, 33, 32);
+$font-color: rgb(221, 221, 221);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container_fluid {
+  height: 1500px;
+  background: $bg-color;
+
+  .container {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+
+    .nav {
+      height: 60px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 50px;
+
+      a {
+        text-decoration: none;
+        font-size: 26px;
+        text-transform: uppercase;
+        color: $font-color;
+
+        &:hover {
+          border-bottom: 1px solid $font-color;
+        }
+      }
+    }
+
+    .promo {
+      background: $bg-color;
+    }
+  }
+}

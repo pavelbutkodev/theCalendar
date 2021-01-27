@@ -6,16 +6,36 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
+    "add": "^2.0.6",
+    "axios": "^0.21.1",
+    "cldr": "4.8.0",
+    "cldr-data": "32.0.1",
+    "cldrjs": "0.5.0",
+    "fs": "0.0.1-security",
+    "globalize": "^0.1.1",
+    "globalize-compiler": "1.0.0",
+    "globalize-webpack-plugin": "2.1.0",
+    "globalizejs": "0.0.1",
+    "moment": "^2.29.1",
+    "node-sass": "4.14.1",
+    "or": "^0.2.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
+    "react-big-calendar": "^0.30.0",
+    "react-calendar": "^3.3.0",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "react-tackle-box": "^2.1.0",
+    "web-vitals": "^0.2.4",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon index"
   },
   "eslintConfig": {
     "extends": [

@@ -1,0 +1,95 @@
+$bg-color: rgb(33, 33, 32);
+$font-color: rgb(221, 221, 221);
+
+.sign_wrapper {
+  background: $bg-color;
+  font-size: 18px;
+  color: $font-color;
+  text-transform: uppercase;
+  background: rgb(221, 221, 221);
+}
+
+.sign_wrapper {
+  background: $bg-color;
+  font-size: 18px;
+  color: $font-color;
+  text-transform: uppercase;
+  width: 600px;
+  margin: 30px auto;
+
+  h2 {
+    color: $font-color;
+    text-align: center;
+    margin: 5px 0;
+    font-size: 28px;
+  }
+
+  .wrapper_form {
+    background: $bg-color;
+    padding: 15px;
+
+    .input_wrapper, .btn_wrapper {
+      margin: 15px auto;
+      display: block;
+      width: 100%;
+      background: $bg-color;
+    }
+
+    .btn_wrapper .btn {
+      margin: 0 auto;
+      cursor: pointer;
+      display: block;
+      outline: none;
+      border: 2px solid $bg-color;
+      border-radius: 10px;
+      background: $font-color;
+      color: $bg-color;
+      text-align: center;
+      width: 30%;
+      height: 60px;
+      font-size: 20px;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .input_wrapper input, .btn_wrapper input {
+      display: block;
+      width: 100%;
+      margin: 0;
+      outline: 0;
+      font-size: 18px;
+      font-weight: 700;
+      background: $font-color;
+      color: $bg-color;
+      border-radius: 5px;
+      box-shadow: inset 0 0 0 0 transparent;
+      padding: 10px;
+
+      & {
+        color: $bg-color;
+        border: 3px solid $bg-color;
+      }
+
+      &:focus {
+        background: none;
+        border: 1px solid $font-color;
+        color: $font-color;
+      }
+
+      &:active {
+        background: #fff;
+        border: 1px solid $font-color;
+        color: $font-color;
+      }
+    }
+
+    .input_wrapper label, .btn_wrapper label {
+      display: block;
+      width: 100%;
+      color: $font-color;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: none;
+    }
+  }
+}
