@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {getAll} from './services/ajaxUser';
 
 import Nav from './component/Nav/Nav';
 
 const App = () => {
-  return (
-    <Nav />
-  );
+    const token = localStorage.getItem('token')
+    const auth = token;
+    return (
+        <Nav auth={auth}/>
+    );
 }
 
 export default App;

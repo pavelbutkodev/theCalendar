@@ -7,7 +7,7 @@ import {login} from '../../services/ajaxUser';
 
 import './Sign.scss';
 
-const SignIn = () => {
+const SignIn = (props) => {
 	const [form, setForm] = useState({
 		email: '',
 		password: ''

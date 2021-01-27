@@ -1,13 +1,15 @@
-import React from 'react'
+import React, {Children} from 'react'
 import globalize from 'globalize';
+import localizer from "react-big-calendar/lib/localizers/globalize";
 import {Calendar} from 'react-big-calendar'
 
 import ExampleControlSlot from './ExampleControlSlot'
-import localizer from "react-big-calendar/lib/localizers/globalize";
-import ModalWindow from "./modal/ModalWindow";
 import {getAll} from "../../services/ajaxUser";
+import ModalWindow from "./modal/ModalWindow";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import "./Calendar.scss"
+import AdminModal from "./modal/AdminModal";
 
 const propTypes = {}
 const globalizeLocalizer = localizer(globalize)
@@ -16,62 +18,45 @@ class Selectable extends React.Component {
 	constructor(...args) {
 		super(...args);
 		this.state = {
-			events: localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')).map(event => ({
-				...event,
-				start: new Date(event.start),
-				end: new Date(event.end),
-			})) : [],
-			abc: [],
+			events: [],
 			active: true,
 			token: localStorage.getItem('token'),
+			panel: true,
 		};
 		this.handleModal = this.handleModal.bind(this);
 		this.admin = localStorage.getItem('admin');
-		this.query = async () => {
-			const arr = await getAll()
-			return arr
+		this.getEvents = async () => {
+			return await getAll()
 		}
 	}
 
-	// handleSelect = ({start, end}) => {
-	// 	const title = window.prompt('New Event name')
-	// 	if (title)
-	// 		this.setState({
-	// 			events: [
-	// 				...this.state.events,
-	// 				{
-	// 					start,
-	// 					end,
-	// 					title,
-	// 				},
-	// 			],
-	// 		})
-	// }
+	handleSelect = () => {
+		this.setState({
+			panel: !this.state.panel
+		})
+	}
+
+	eventStyleGetter = () => {
+		const backgroundColor = 'rgb(28,173,248)';
+		const style = {
+			backgroundColor: backgroundColor,
+			color: '#fff',
+			display: 'block'
+		};
+		return {
+			style: style
+		};
+	};
+
+	rerender(event) {
+		this.setState({
+			events: event
+		})
+	}
 
 	handleModal(){
 		this.setState({active: !this.state.active});
 	};
-
-// eventStyleGetter = (event) => {
-	// 	console.log(event);
-	// 	const backgroundColor = '#' + event.hexColor;
-	// 	const style = {
-	// 		backgroundColor: backgroundColor,
-	// 		borderRadius: '0px',
-	// 		opacity: 0.8,
-	// 		color: 'black',
-	// 		border: '0px',
-	// 		display: 'block'
-	// 	};
-	// 	return {
-	// 		style: style
-	// 	};
-	// };
-	rerender(data) {
-		this.setState({
-			abc: data
-		})
-	}
 
 	handleChange = (value) => {
 		this.setState({
@@ -80,15 +65,15 @@ class Selectable extends React.Component {
 	}
 
 	componentDidMount() {
-		this.query().then((data) => {
-				this.rerender(data)
+		this.getEvents().then((event) => {
+			this.rerender(event)
 		})
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if(this.state.active !== prevState.active){
-			this.query().then((data) => {
-				this.rerender(data)
+			this.getEvents().then((event) => {
+				this.rerender(event)
 			})
 		}
 	}
@@ -98,10 +83,14 @@ class Selectable extends React.Component {
 			<div>
 				{
 					this.admin === 'test@mail.ru' ?
-					<div>
-						<button onClick={this.handleModal}>вызвать модалку</button>
+					<div className="admin_panel">
+						<h2>Панель администратора:</h2>
+						<button className="modal_btn" onClick={this.handleModal}>Создать событие</button>
 						<div className={`modal_wrapper ${this.state.active ? '' : 'active'}`}>
 							<ModalWindow setActive={this.handleChange}/>
+						</div>
+						<div className={`modal_wrapper ${this.state.panel ? '' : 'active'}`}>
+							<AdminModal setActive={this.handleSelect}/>
 						</div>
 					</div>
 					:
@@ -114,17 +103,20 @@ class Selectable extends React.Component {
 					</strong>
 				</ExampleControlSlot.Entry>
 				<Calendar
+					selectable
 					views={['month', 'week', 'day']}
 					defaultDate={new Date()}
 					defaultView="month"
-					style={{height: "100vh"}}
+					style={{height: "700px"}}
 					step={60}
-					selectable
 					localizer={globalizeLocalizer}
-					events={this.state.abc}
-					onSelectEvent={event => console.log(event)}
-					// onSelectSlot={this.handleSelect}
-					// eventPropGetter={(this.eventStyleGetter)}
+					events={this.state.events.map(event => ({
+						...event,
+						start: new Date(event.start),
+						end: new Date(event.end),
+					}))}
+					onSelectEvent={this.handleSelect}
+					eventPropGetter={(this.eventStyleGetter)}
 				/>
 			</div>
 		)

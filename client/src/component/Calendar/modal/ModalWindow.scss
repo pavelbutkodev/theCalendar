@@ -6,7 +6,7 @@ $font-color: rgb(221, 221, 221);
 
   .modal_wrapper {
     width: 500px;
-    height: 500px;
+    height: 350px;
     background: $bg-color;
     color: $font-color;
     z-index: 1000;
@@ -17,6 +17,7 @@ $font-color: rgb(221, 221, 221);
   }
 
   h2 {
+    padding-left: 12px;
     color: $font-color;
     text-align: center;
     margin: 5px 0;
@@ -25,6 +26,23 @@ $font-color: rgb(221, 221, 221);
 
   .active {
     display: block;
+  }
+
+  .modal_form {
+    padding: 20px 50px 20px 20px;
+    border: 2px solid $font-color;
+    box-shadow: 2px 2px 9px 8px rgba(255, 255, 2555, .75);
+  }
+
+  .close {
+    height: 20px;
+    width: 20px;
+    background: none;
+    border: none;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    outline: none;
   }
 }
 
